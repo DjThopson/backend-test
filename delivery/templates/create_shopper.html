@@ -1,0 +1,13 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+
+    <h2>Nuevo cliente</h2>
+	<br>
+    <form method="POST" class="order-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+
+
+{% endblock body %}

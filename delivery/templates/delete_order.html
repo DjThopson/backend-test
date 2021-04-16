@@ -1,0 +1,22 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+			<p>Estás por eliminiar la orden "{{order.id}}"?</p>
+
+			<form action="{% url 'delivery:drop_order' order.id %}" method="POST">
+				
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'delivery:main' %}">Cancelar</a>
+
+				<button type="submit" class="btn btn-danger">Confirmar</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock body %}

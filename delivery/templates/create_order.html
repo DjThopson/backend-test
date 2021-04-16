@@ -1,0 +1,81 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+	<br>
+    {%if message%}
+    <h4 style="color: red;">{{message}}</h4>
+    <br>
+    {%endif%}
+    <div class="row">
+        <div class="col-12">    
+          <div class="card">
+            
+            <div class="card-header">
+                <h4>Menu del día</h4>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Opción</th>
+                  <th>Descripción</th>
+                  <th>Platillos</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for option in options %}
+                    <tr>
+                      <td>{{ option.name }}</td>
+                      <td>{{ option.description }}</td>
+                      <td>
+                        <ul>  
+                      {% for dish in option.dishes.all %}
+                            <li>{{dish.name}}</li>
+                            {% endfor %}
+                        </ul>
+                      </td>
+                      
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+    <br>
+    
+    <form method="POST">{% csrf_token %}
+        <div class="fieldWrapper">
+          <h4 style="color: red;">{{ form.errors.invalid_hour }}</h4>
+        </div>
+        <div class="fieldWrapper">
+            {{ form.option.errors }}
+            <label for="id_option">Option:</label>
+            <select name="option" required="" id="id_option">
+                <option value="" selected="">---------</option>
+                {% for option in options %}
+                <option value="{{option.id}}">{{option.name}}</option>
+                {% endfor %}
+              </select>
+        </div>
+        <div class="fieldWrapper">
+            {{ form.specifications.errors }}
+            <label for="id_specifications">Specifications:</label>
+            <textarea name="specifications" cols="40" rows="10" id="id_specifications"></textarea>
+        </div>
+        <div class="fieldWrapper" hidden>
+            {{form.shopper}}
+        </div>
+        
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+    
+
+
+{% endblock body %}

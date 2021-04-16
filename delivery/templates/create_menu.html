@@ -1,0 +1,18 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+
+    <h4>Crear menu para el día</h4>
+	<br>
+    {%if message%}
+    <h4 style="color: red;">{{message}}</h4>
+    <br>
+    {%endif%}
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+    
+
+
+{% endblock body %}

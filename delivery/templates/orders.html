@@ -1,0 +1,66 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+<div id=modals></div>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Órdenes</h1>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">    
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Platillos</th>
+                  <th>Fecha de solicitud</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                      <td>{{ order.shopper.name }}</td>
+                      <td>
+                        <ul>  
+                          {% for dish in order.option.dishes.all %}
+                            <li>{{dish.name}}</li>
+                          {% endfor %}
+                        </ul>
+                      </td> 
+                      <td>{{ order.dateAdd }}</td>
+                      <td><a class="btn btn-sm btn-info" href="{% url 'delivery:edit_order' order.id %}">Editar</a></td>
+                      <td><a class="btn btn-sm btn-danger" href="{% url 'delivery:drop_order' order.id %}">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+</div>
+
+
+
+{% endblock body %}

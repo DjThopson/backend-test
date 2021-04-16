@@ -1,0 +1,117 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Backend Test</title>
+  
+<!-- Bootstrap core CSS -->
+<link href="{% static 'plugins/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >
+
+<!-- Custom styles for this template -->
+<link href="{% static 'plugins/css/blog-home.css' %}" rel="stylesheet">
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Entrega de comida</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'delivery:logout' %}">Cerrar sesión</a>
+            </li>
+            {% localtime on %}
+            <li class="nav-item">
+              <a class="nav-link" >Hora: {% now "H:i" %}</a>
+            </li>
+            {% endlocaltime %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Page Content -->
+    <div class="container">
+  
+      <div class="row">
+  
+        <!-- View Column -->
+        <div class="col-md-9">
+          <!-- Content-->
+          <div class="mb-4">
+            {% block body%}
+            {% endblock body%}
+          </div>
+        </div>
+  
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+  
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Acciones</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                        <ul class="list-unstyled mb-0">
+                            {% if user.get_username == 'nora' %}
+                          <li>
+                            <a onclick="" href="{% url 'delivery:create_menu' %}">Crear menú</a>
+                          </li>
+                          <li>
+                            <a onclick="" href="{% url 'delivery:create_options' %}">Crear opciones</a>
+                          </li>
+                          <li>
+                            <a onclick="" href="{% url 'delivery:create_dishes' %}">Crear platillos</a>
+                          </li>
+                          <li>
+                            <a href="{% url 'delivery:main' %}">Listas pedidos</a>
+                          </li>
+                          <li>
+                            <a href="{% url 'delivery:create_shopper' %}">Agregar cliente</a>
+                          </li>
+                          {% endif%}
+                        </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+  
+        </div>
+  
+      </div>
+      <!-- /.row -->
+  
+    </div>
+    <!-- /.container -->
+  
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; 2021</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'plugins/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+  </body>
+</html>

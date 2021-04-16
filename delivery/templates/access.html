@@ -1,0 +1,43 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Acceso denegado</h1>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">    
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+                <p>El acceso debe ser realizado desde la URL que llegó a tu Slack. Si aún no tienes la URL solicítala aquí.</p>
+                <input type="text" placeholder="digita tu slack">
+                <button>Solicitar URL</button>
+                
+            </div>
+            <div class="card-body">
+              <p>De lo contrario puedes iniciar sesión <a href="{% url 'delivery:loginpage'%}">aquí</a></p>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+</div>
+{% endblock body %}

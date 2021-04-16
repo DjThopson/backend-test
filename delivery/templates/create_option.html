@@ -1,0 +1,14 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+
+    <h2>Crear opción</h2>
+	<br>
+
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+
+
+{% endblock body %}

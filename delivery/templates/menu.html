@@ -1,0 +1,123 @@
+{% extends 'base/home.html' %}
+{% block body %}
+<br>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Menú</h1>
+              {% if shopper %}
+              <h4>Hola {{ shopper.name }}</h4>
+              {% endif %}
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">    
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              
+              
+              {% if orderToday|length %}
+              <h4>Pedido de hoy </h4>
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Opción</th>
+                    <th>Especificaciones</th>
+                    <th>Platillos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for order in orderToday %}
+                    <td>{{ order.option }}</td>
+                    <td>{{ order.specifications }}</td>
+                    <td>
+                      <ul>  
+                        {% for dish in order.option.dishes.all %}
+                          <li>{{dish.name}}</li>
+                        {% endfor %}
+                      </ul>
+                    </td> 
+                    {% endfor %}
+                  </tr>    
+                </tbody>
+              </table>
+              {% else %}
+              <h4>Aún no cuentas con un pedido</h4>
+              <br>
+              <a class="btn btn-bg btn-info" href="{% url 'delivery:create_order' shopper.id %}">Realizar pedido</a>
+              {% endif%}
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+
+  {% if orders %}
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">    
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <h4>Órdenes previas</h4>
+              
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Opción</th>
+                    <th>Especificaciones</th>
+                    <th>Platillos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for order in orderToday %}
+                    <td>{{ order.option }}</td>
+                    <td>{{ order.specifications }}</td>
+                    <td>
+                      <ul>  
+                        {% for dish in order.option.dishes.all %}
+                          <li>{{dish.name}}</li>
+                        {% endfor %}
+                      </ul>
+                    </td> 
+                    {% endfor %}
+                  </tr>    
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  {% endif %}
+
+</div>
+{% endblock body %}
+
